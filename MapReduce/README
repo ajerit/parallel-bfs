@@ -1,0 +1,31 @@
+PROYECO MAP REDUCE
+
+COMPILAR y CREAR JARS
+***************************
+./make-all.sh 
+
+
+PRIMERA FASE:
+*********************
+hadoop jar inputFormat/inputFormat.jar inputFormat InputPath NODOINICIAL
+
+BFS:
+*********************
+hadoop jar bfs/bfs.jar BFS
+
+
+Cómo ejectar el BFS para MapReduce
+*************************************
+1) Primera fase recibe un archivo con formato 
+     USER\tFOLLOWER\n
+donde USER y FOLLOWER son ids numéricos
+
+2) La primera fase lo convierte a un formato donde se tiene el userid y luego en la misma linea
+todos sus seguidores, la distancia inicial (MAX INT en Java, 0 para el Nodo Inicial) y el color correspondiente (GRIS para Inicial, BLANCO los demás)
+
+    USER\tDISTANCIA|COLOR|FOLLOWER,FOLLOWER,FOLLOWER,FOLLOWER,FOLLOWER,FOLLOWER,FOLLOWER ... \n
+
+4) Ejecutar la búsqueda BFS sobre el output de modificado de la fase 1
+
+5) Iterar hasta conseguir que todas las distancias sean distintas a infinito
+
